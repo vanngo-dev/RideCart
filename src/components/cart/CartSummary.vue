@@ -22,12 +22,12 @@ const formattedSubtotal = computed(() =>
     <dl>
       <div>
         <dt>Total items</dt>
-        <dd>{{ totalItems }}</dd>
+        <dd data-testid="cart-total-items">{{ totalItems }}</dd>
       </div>
 
       <div>
         <dt>Subtotal</dt>
-        <dd>{{ formattedSubtotal }}</dd>
+        <dd data-testid="cart-subtotal">{{ formattedSubtotal }}</dd>
       </div>
     </dl>
 

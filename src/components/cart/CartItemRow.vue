@@ -14,6 +14,14 @@ const emit = defineEmits<{
   remove: [productId: string]
 }>()
 
+const formattedUnitPrice = computed(() =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(props.item.product.price),
+)
+
 const formattedLineTotal = computed(() =>
   new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -21,10 +29,14 @@ const formattedLineTotal = computed(() =>
     maximumFractionDigits: 0,
   }).format(props.item.product.price * props.item.quantity),
 )
+
+const cartItemTestId = computed(() => `cart-item-${props.item.product.slug}`)
+const quantityTestId = computed(() => `cart-quantity-${props.item.product.slug}`)
+const lineTotalTestId = computed(() => `cart-line-total-${props.item.product.slug}`)
 </script>
 
 <template>
-  <article class="cart-item">
+  <article class="cart-item" :data-testid="cartItemTestId">
     <img
       class="cart-item__image"
       :src="item.product.imageUrl"
@@ -36,15 +48,11 @@ const formattedLineTotal = computed(() =>
     <div class="cart-item__body">
       <div class="cart-item__header">
         <h3>{{ item.product.name }}</h3>
-        <p>{{ formattedLineTotal }}</p>
+        <p :data-testid="lineTotalTestId">{{ formattedLineTotal }}</p>
       </div>
 
       <p class="cart-item__meta">
-        {{ item.product.category }} · {{ item.product.price.toLocaleString('en-US', {
-          style: 'currency',
-          currency: 'USD',
-          maximumFractionDigits: 0,
-        }) }} each
+        {{ item.product.category }} · {{ formattedUnitPrice }} each
       </p>
 
       <div class="cart-item__controls" :aria-label="`Quantity controls for ${item.product.name}`">
@@ -57,7 +65,7 @@ const formattedLineTotal = computed(() =>
           −
         </AppButton>
 
-        <span class="cart-item__quantity" aria-label="Current quantity">
+        <span class="cart-item__quantity" :data-testid="quantityTestId" aria-label="Current quantity">
           {{ item.quantity }}
         </span>
 

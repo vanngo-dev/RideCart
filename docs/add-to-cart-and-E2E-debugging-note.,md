@@ -1,0 +1,235 @@
+# Phase 08 — Add-to-cart runtime and E2E debugging notes
+
+@'
+# Phase 08 Add-to-Cart and E2E Debugging Notes
+
+## Context
+
+Phase 08 expanded testing with a browsing-to-cart E2E flow. The intended flow was:
+
+```text
+/products
+→ filter for helmet
+→ open PeakGuard Helmet detail page
+→ add product to cart
+→ verify cart drawer opens
+→ increase quantity
+→ decrease quantity
+→ remove item
+
+This phase exposed two different classes of issues:
+
+A real runtime add-to-cart integration issue.
+E2E selector strict-mode issues.
+
+Both are useful future references because they show why manual verification and Playwright debugging should be separated.
+
+Issue 1 — Add to Cart Click Did Not Open Cart Drawer
+Symptom
+
+Manual testing showed that clicking Add to cart caused status text to appear, but the cart drawer did not open.
+
+Example behavior:
+
+Click Add to cart
+→ "PeakGuard Helmet added to cart." text appears
+→ cart drawer does not open
+
+This meant the click handler was firing, but the cart drawer state was not being opened.
+
+Diagnosis
+
+Because the status text appeared, the click was reaching the page-level handler.
+
+The missing step was the Pinia cart drawer action:
+
+cartStore.openCart()
+
+The broken behavior was not caused by Playwright. It was a real runtime wiring problem.
+
+Expected Runtime Path
+ProductCard or detail Add to cart button
+→ page-level handleAddToCart(product)
+→ cartStore.addItem(product)
+→ cartStore.openCart()
+→ cartStore.isOpen becomes true
+→ CartDrawer receives open=true
+→ AppDrawer renders sidebar
+Fix
+
+The page-level add-to-cart handlers were updated to call both:
+
+cartStore.addItem(product)
+cartStore.openCart()
+
+The product list handler was reset to:
+
+const handleAddToCart = (product: Product) => {
+  cartStore.addItem(product)
+  cartStore.openCart()
+  lastAddedProductName.value = product.name
+}
+
+The product detail handler was also verified to use the same pattern:
+
+const handleAddToCart = (selectedProduct: Product) => {
+  cartStore.addItem(selectedProduct)
+  cartStore.openCart()
+  lastAddedProductName.value = selectedProduct.name
+}
+
+For the main product detail add-to-cart action, a native button was used to remove any ambiguity around custom component click forwarding:
+
+<button
+  data-testid="detail-add-to-cart"
+  class="detail-add-button"
+  type="button"
+  :disabled="!product.inStock"
+  @click="handleAddToCart(product)"
+>
+  Add to cart
+</button>
+Verification
+
+Manual testing confirmed:
+
+Product listing Add to cart opens the drawer.
+Product detail Add to cart opens the drawer.
+Product appears in the drawer.
+Header cart count updates.
+Subtotal updates.
+Quantity controls work.
+Remove item works.
+Lesson
+
+If a click causes nearby UI text to update but does not trigger the expected global state change, the click handler is probably firing but missing a store action.
+
+Debug in this order:
+
+Confirm the click handler fires.
+Confirm local status text updates.
+Confirm the Pinia action is called.
+Confirm the Pinia state changes.
+Confirm the parent shell passes state to the drawer.
+Confirm the drawer renders.
+Issue 2 — E2E Failed Even After Manual Add to Cart Worked
+Symptom
+
+After manual add-to-cart behavior worked, the E2E test still failed.
+
+The first strict-mode error was:
+
+getByText('Specifications') resolved to 2 elements:
+1. h2: Specifications
+2. caption: Product specifications
+
+The second strict-mode error was:
+
+getByText('PeakGuard Helmet') resolved to 3 elements:
+1. Product detail page h1
+2. Status text: PeakGuard Helmet added to cart.
+3. Cart drawer h3
+Diagnosis
+
+These were not app bugs. They were Playwright strict-mode selector problems.
+
+Playwright requires locators to resolve to one element unless .first(), .nth(), or scoped locators are used.
+
+The test was using broad global text selectors even though the same text appeared in multiple parts of the page.
+
+Fix 1 — Use Role Selector for Specifications
+
+Instead of:
+
+await expect(page.getByText('Specifications')).toBeVisible()
+
+use:
+
+await expect(page.getByRole('heading', { name: 'Specifications' })).toBeVisible()
+
+This targets the visible heading instead of accidentally matching the table caption.
+
+Fix 2 — Scope Cart Assertions to the Drawer
+
+Instead of globally searching for product text:
+
+await expect(page.getByText('PeakGuard Helmet')).toBeVisible()
+
+scope the assertion:
+
+const drawer = page.getByTestId('cart-drawer')
+
+await expect(drawer).toBeVisible()
+await expect(drawer.getByRole('heading', { name: 'PeakGuard Helmet' })).toBeVisible()
+Fix 3 — Add Stable Cart Test IDs
+
+To reduce brittle text matching in the cart flow, stable test IDs were added to cart-specific state elements.
+
+Cart item row:
+
+<article :data-testid="`cart-item-${item.product.slug}`">
+
+Cart quantity:
+
+<span :data-testid="`cart-quantity-${item.product.slug}`">
+  {{ item.quantity }}
+</span>
+
+Cart line total:
+
+<p :data-testid="`cart-line-total-${item.product.slug}`">
+  {{ formattedLineTotal }}
+</p>
+
+Cart summary:
+
+<dd data-testid="cart-total-items">{{ totalItems }}</dd>
+<dd data-testid="cart-subtotal">{{ formattedSubtotal }}</dd>
+Final E2E Selector Strategy
+
+Use semantic selectors for user-facing navigation and labels:
+
+page.getByLabel('Search products')
+page.getByRole('link', { name: 'PeakGuard Helmet' })
+page.getByRole('heading', { name: 'Specifications' })
+
+Use test IDs for repeated cart state values:
+
+page.getByTestId('cart-drawer')
+page.getByTestId('cart-item-peakguard-helmet')
+page.getByTestId('cart-quantity-peakguard-helmet')
+page.getByTestId('cart-line-total-peakguard-helmet')
+page.getByTestId('cart-total-items')
+page.getByTestId('cart-subtotal')
+Lesson
+
+When manual behavior works but E2E fails, do not rewrite app logic immediately.
+
+Debug in this order:
+
+Confirm manual behavior works.
+Check the exact Playwright error.
+Look for strict-mode selector conflicts.
+Replace broad text selectors with role/label selectors.
+Scope assertions to the relevant container.
+Add data-testid only for stable app-state assertions.
+Rerun the single failing E2E file before running the full suite.
+Final Result
+
+The runtime issue and E2E issue were separate:
+
+Runtime issue:
+Add to cart handler did not open Pinia cart drawer state.
+
+E2E issue:
+Playwright selectors were too broad and matched repeated text.
+
+The fixes were:
+
+Runtime fix:
+Call cartStore.addItem(product) and cartStore.openCart() in add-to-cart handlers.
+
+E2E fix:
+Use scoped drawer locators and stable cart test IDs for repeated cart content.
+
+This note should be used as future reference whenever a Vue interaction works partially, or when Playwright strict mode reports multiple matching elements.

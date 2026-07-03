@@ -8,10 +8,12 @@ import ProductImageGallery from '@/components/product/ProductImageGallery.vue'
 import ProductSpecsTable from '@/components/product/ProductSpecsTable.vue'
 import AppBadge from '@/components/ui/AppBadge.vue'
 import AppButton from '@/components/ui/AppButton.vue'
-import { getProductBySlug, getRelatedProducts } from '@/utils/productLookup'
+import { useCartStore } from '@/stores/cartStore'
 import type { Product } from '@/types/product'
+import { getProductBySlug, getRelatedProducts } from '@/utils/productLookup'
 
 const route = useRoute()
+const cartStore = useCartStore()
 
 const productSlug = computed(() => String(route.params.slug ?? ''))
 const product = computed(() => getProductBySlug(productSlug.value))
@@ -55,6 +57,8 @@ const stockVariant = computed<'success' | 'warning'>(() => {
 const lastAddedProductName = ref('')
 
 const handleAddToCart = (selectedProduct: Product) => {
+  cartStore.addItem(selectedProduct)
+  cartStore.openCart()
   lastAddedProductName.value = selectedProduct.name
 }
 </script>
@@ -103,13 +107,17 @@ const handleAddToCart = (selectedProduct: Product) => {
           </ul>
 
           <div class="product-detail__actions">
-            <AppButton :disabled="!product.inStock" @click="handleAddToCart(product)">
+            <AppButton
+              data-testid="detail-add-to-cart"
+              :disabled="!product.inStock"
+              @click="handleAddToCart(product)"
+            >
               Add to cart
             </AppButton>
           </div>
 
           <p v-if="lastAddedProductName" class="product-detail__status" role="status" aria-live="polite">
-            {{ lastAddedProductName }} selected. Cart behavior will be completed in the cart phase.
+            {{ lastAddedProductName }} added to cart.
           </p>
         </section>
       </div>
@@ -237,6 +245,36 @@ h1 {
   margin-top: 0.5rem;
 }
 
+.detail-add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.625rem 1rem;
+}
+
+.detail-add-button:hover:not(:disabled) {
+  background: #374151;
+}
+
+.detail-add-button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.detail-add-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
 .product-detail__status {
   margin: 0;
   color: #4b5563;
@@ -296,3 +334,4 @@ h1 {
   }
 }
 </style>
+

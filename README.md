@@ -131,3 +131,17 @@ Cart state is managed with Pinia and kept separate from page components. The car
 The interface uses semantic landmarks, labeled form controls, descriptive image alt text, native buttons and links, visible focus states, keyboard-friendly cart drawer behavior, and a Playwright axe smoke test for the product listing page.
 
 See `docs/accessibility-notes.md`.
+
+## E2E Debugging Notes
+
+A Phase 07 E2E issue involving the cart drawer is documented in `docs/e2e-debugging-notes.md`. The note captures the debugging path from failing Playwright selector to manual runtime verification, event wiring fix, and final stable smoke test.
+
+## Testing Notes
+
+Testing covers product data assumptions, product filtering, reusable component behavior, cart state, route lookup, accessibility smoke checks, and a browsing-to-cart E2E flow.
+
+See `docs/testing-notes.md`.
+
+## Phase 08 Debugging Notes
+
+The Phase 08 browsing-to-cart flow exposed both a runtime add-to-cart drawer issue and Playwright strict-mode selector issues. The debugging path and fixes are documented in `docs/phase-08-add-to-cart-e2e-debugging-notes.md`.

@@ -6,6 +6,7 @@ import ProductFilters from '@/components/product/ProductFilters.vue'
 import ProductGrid from '@/components/product/ProductGrid.vue'
 import { useProductFilters } from '@/composables/useProductFilters'
 import { products } from '@/data/products'
+import { useCartStore } from '@/stores/cartStore'
 import type { Product } from '@/types/product'
 
 const {
@@ -16,9 +17,12 @@ const {
   resetFilters,
 } = useProductFilters(products)
 
+const cartStore = useCartStore()
 const lastAddedProductName = ref('')
 
 const handleAddToCart = (product: Product) => {
+  cartStore.addItem(product)
+  cartStore.openCart()
   lastAddedProductName.value = product.name
 }
 </script>
@@ -51,7 +55,7 @@ const handleAddToCart = (product: Product) => {
         </h2>
 
         <p v-if="lastAddedProductName" role="status" aria-live="polite">
-          {{ lastAddedProductName }} selected. Cart behavior will be completed in the cart phase.
+          {{ lastAddedProductName }} added to cart.
         </p>
       </div>
 
@@ -109,6 +113,7 @@ h1 {
 
 .results-summary p {
   color: #4b5563;
+  font-weight: 700;
 }
 
 @media (max-width: 640px) {

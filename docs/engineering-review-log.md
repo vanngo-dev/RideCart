@@ -133,3 +133,34 @@ Added accessibility notes, improved cart button labeling, improved cart drawer f
 ### Notes
 
 The accessibility pass focused on semantic controls, labels, keyboard navigation, drawer Escape behavior, focus movement, image alt text, and obvious axe violations.
+
+## Phase 08 — Testing Expansion
+
+### Summary
+
+Expanded test coverage with a currency formatting unit test, product filter component tests, product grid component tests, a browsing-to-cart E2E flow, and testing documentation.
+
+### Validation
+
+- npm run type-check
+- npm run test:unit
+- npm run build
+- npm run test:e2e
+
+### Notes
+
+The E2E happy path now covers filtering products, opening a product detail route, adding a product to cart, changing quantity, and removing the item. Stable test IDs are used only where they reduce brittleness for cart drawer state checks.
+
+### Phase 08 Add-to-Cart and E2E Debugging Follow-up
+
+Added `docs/phase-08-add-to-cart-e2e-debugging-notes.md`.
+
+This note documents two separate issues discovered during the Phase 08 browsing-to-cart E2E flow:
+
+1. A real runtime add-to-cart issue where the click handler updated local status text but did not open the Pinia cart drawer.
+2. Playwright strict-mode selector issues caused by broad text selectors matching repeated content such as `Specifications` and `PeakGuard Helmet`.
+
+Final fixes:
+- Page-level add-to-cart handlers call both `cartStore.addItem(product)` and `cartStore.openCart()`.
+- Product detail uses a direct native button for the main add-to-cart action.
+- Cart E2E assertions use scoped drawer locators and stable `data-testid` hooks for cart state.

@@ -68,3 +68,19 @@ Added reusable typed UI components for buttons, badges, inputs, selects, drawers
 ### Notes
 
 The shared UI layer uses semantic HTML, typed props, typed emits, basic focus styling, and component tests for button and input behavior.
+
+## Phase 04 — Product Listing, Filtering, and Sorting
+
+### Summary
+
+Added product browsing with reusable product cards, responsive grid layout, search, category filtering, sorting, and empty state handling.
+
+### Validation
+
+- npm run typecheck
+- npm run test:unit
+- npm run build
+
+### Notes
+
+Filtering and sorting logic is isolated in `useProductFilters`. Cart behavior remains a placeholder until the cart state phase.

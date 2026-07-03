@@ -113,3 +113,7 @@ The product model uses typed fields for category, pricing, image metadata, stock
 ## Reusable UI Components
 
 The UI layer uses small typed Vue components for common controls such as buttons, badges, inputs, selects, drawers, and tabs. Components use semantic HTML first and expose focused props and emits for reuse across page-level features.
+
+## Product Browsing
+
+The product listing view supports search, category filtering, sort options, responsive cards, and empty states. Filtering logic is isolated in a composable to keep the view easier to maintain.

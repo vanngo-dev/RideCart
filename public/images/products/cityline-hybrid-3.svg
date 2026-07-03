@@ -1,0 +1,15 @@
+﻿<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">CityLine Hybrid 3</title>
+  <desc id="desc">Placeholder product image for CityLine Hybrid 3</desc>
+  <rect width="960" height="720" fill="#F3F4F6"/>
+  <rect x="64" y="64" width="832" height="592" rx="32" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="4"/>
+  <circle cx="312" cy="430" r="92" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="16"/>
+  <circle cx="648" cy="430" r="92" fill="#E5E7EB" stroke="#9CA3AF" stroke-width="16"/>
+  <path d="M312 430L430 280L540 430H312Z" stroke="#111827" stroke-width="18" stroke-linejoin="round"/>
+  <path d="M430 280L648 430" stroke="#111827" stroke-width="18" stroke-linecap="round"/>
+  <path d="M540 430L610 280" stroke="#111827" stroke-width="18" stroke-linecap="round"/>
+  <path d="M394 240H492" stroke="#111827" stroke-width="18" stroke-linecap="round"/>
+  <path d="M610 280H690" stroke="#111827" stroke-width="18" stroke-linecap="round"/>
+  <text x="480" y="140" text-anchor="middle" fill="#111827" font-family="Arial, sans-serif" font-size="44" font-weight="700">CityLine Hybrid 3</text>
+  <text x="480" y="200" text-anchor="middle" fill="#6B7280" font-family="Arial, sans-serif" font-size="28">Hybrid Bike</text>
+</svg>

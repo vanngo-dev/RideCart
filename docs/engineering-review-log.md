@@ -164,3 +164,20 @@ Final fixes:
 - Page-level add-to-cart handlers call both `cartStore.addItem(product)` and `cartStore.openCart()`.
 - Product detail uses a direct native button for the main add-to-cart action.
 - Cart E2E assertions use scoped drawer locators and stable `data-testid` hooks for cart state.
+
+## Phase 09 — Performance and Build Review
+
+### Summary
+
+Added local product placeholder SVG images, updated product image paths, documented performance notes, and reviewed production-readiness checks.
+
+### Validation
+
+- npm run type-check
+- npm run test:unit
+- npm run build
+- npm run test:e2e
+
+### Notes
+
+Product images now resolve locally instead of producing missing-image requests. Image elements use lazy loading and async decoding. Performance notes document image strategy, computed filtering, cart totals, build checks, and known scope limits.

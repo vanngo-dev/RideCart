@@ -7,7 +7,7 @@ export const products: Product[] = [
     name: 'Apex Road 2',
     category: 'road',
     price: 1499,
-    imageUrl: '/images/products/apex-road-2.jpg',
+    imageUrl: '/images/products/apex-road-2.svg',
     imageAlt: 'Apex Road 2 road bike in matte blue side profile',
     shortDescription: 'Lightweight road bike built for efficient daily training.',
     description:
@@ -27,7 +27,7 @@ export const products: Product[] = [
     name: 'TrailCore Mountain 5',
     category: 'mountain',
     price: 1899,
-    imageUrl: '/images/products/trailcore-mountain-5.jpg',
+    imageUrl: '/images/products/trailcore-mountain-5.svg',
     imageAlt: 'TrailCore Mountain 5 mountain bike on a rocky trail',
     shortDescription: 'Trail-ready mountain bike for technical terrain.',
     description:
@@ -47,7 +47,7 @@ export const products: Product[] = [
     name: 'CityLine Hybrid 3',
     category: 'hybrid',
     price: 899,
-    imageUrl: '/images/products/cityline-hybrid-3.jpg',
+    imageUrl: '/images/products/cityline-hybrid-3.svg',
     imageAlt: 'CityLine Hybrid 3 commuter bike with flat handlebars',
     shortDescription: 'Comfortable hybrid bike for commuting and weekend rides.',
     description:
@@ -67,7 +67,7 @@ export const products: Product[] = [
     name: 'VoltPath E-Ride 1',
     category: 'electric',
     price: 2499,
-    imageUrl: '/images/products/voltpath-e-ride-1.jpg',
+    imageUrl: '/images/products/voltpath-e-ride-1.svg',
     imageAlt: 'VoltPath E-Ride 1 electric bike with integrated battery',
     shortDescription: 'Electric assist bike for longer commutes and easier climbs.',
     description:
@@ -87,7 +87,7 @@ export const products: Product[] = [
     name: 'GravelWay Adventure 4',
     category: 'road',
     price: 1699,
-    imageUrl: '/images/products/gravelway-adventure-4.jpg',
+    imageUrl: '/images/products/gravelway-adventure-4.svg',
     imageAlt: 'GravelWay Adventure 4 gravel bike on a dirt road',
     shortDescription: 'All-road bike for pavement, gravel, and mixed routes.',
     description:
@@ -107,7 +107,7 @@ export const products: Product[] = [
     name: 'PeakGuard Helmet',
     category: 'gear',
     price: 89,
-    imageUrl: '/images/products/peakguard-helmet.jpg',
+    imageUrl: '/images/products/peakguard-helmet.svg',
     imageAlt: 'PeakGuard cycling helmet with ventilation channels',
     shortDescription: 'Lightweight helmet with everyday ride protection.',
     description:
@@ -127,7 +127,7 @@ export const products: Product[] = [
     name: 'FlowRide Gloves',
     category: 'gear',
     price: 39,
-    imageUrl: '/images/products/flowride-gloves.jpg',
+    imageUrl: '/images/products/flowride-gloves.svg',
     imageAlt: 'FlowRide cycling gloves with padded palms',
     shortDescription: 'Padded cycling gloves for comfort and grip.',
     description:
@@ -147,7 +147,7 @@ export const products: Product[] = [
     name: 'RackMate Cargo Kit',
     category: 'gear',
     price: 129,
-    imageUrl: '/images/products/rackmate-cargo-kit.jpg',
+    imageUrl: '/images/products/rackmate-cargo-kit.svg',
     imageAlt: 'RackMate rear cargo rack with side pannier bags',
     shortDescription: 'Rear rack and cargo kit for daily utility rides.',
     description:

@@ -145,3 +145,9 @@ See `docs/testing-notes.md`.
 ## Phase 08 Debugging Notes
 
 The Phase 08 browsing-to-cart flow exposed both a runtime add-to-cart drawer issue and Playwright strict-mode selector issues. The debugging path and fixes are documented in `docs/phase-08-add-to-cart-e2e-debugging-notes.md`.
+
+## Performance Notes
+
+The project uses local placeholder product images, lazy image loading, async image decoding, computed product filtering, Pinia-derived cart totals, and production build checks.
+
+See `docs/performance-notes.md`.

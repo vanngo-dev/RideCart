@@ -21,7 +21,7 @@ Initialized the Vue 3 + TypeScript application with Vite, Vue Router, Pinia, Vit
 ### Notes
 
 Starter content was removed and replaced with a basic application shell, placeholder routes, and neutral project documentation.
-## Phase 01 — Domain Model and Mock Product Data
+## Phase 01 ï¿½ Domain Model and Mock Product Data
 
 ### Summary
 
@@ -37,7 +37,7 @@ Added typed product and filter models with mock product data for the commerce UI
 
 Product data includes unique IDs, unique slugs, image alt text, stock state, ratings, tags, pricing, and technical specifications.
 
-## Phase 02 — Routing, Layout, and Page Skeletons
+## Phase 02 ï¿½ Routing, Layout, and Page Skeletons
 
 ### Summary
 
@@ -53,7 +53,7 @@ Added the base application layout, route-driven page skeletons, header navigatio
 
 The layout now separates the app shell from page views. Product browsing and detail pages remain placeholders until the product component phases.
 
-## Phase 03 — Reusable UI Components
+## Phase 03 ï¿½ Reusable UI Components
 
 ### Summary
 
@@ -69,7 +69,7 @@ Added reusable typed UI components for buttons, badges, inputs, selects, drawers
 
 The shared UI layer uses semantic HTML, typed props, typed emits, basic focus styling, and component tests for button and input behavior.
 
-## Phase 04 — Product Listing, Filtering, and Sorting
+## Phase 04 ï¿½ Product Listing, Filtering, and Sorting
 
 ### Summary
 
@@ -85,7 +85,7 @@ Added product browsing with reusable product cards, responsive grid layout, sear
 
 Filtering and sorting logic is isolated in `useProductFilters`. Cart behavior remains a placeholder until the cart state phase.
 
-## Phase 05 — Product Detail Page
+## Phase 05 ï¿½ Product Detail Page
 
 ### Summary
 
@@ -101,7 +101,7 @@ Added route-driven product detail pages with product lookup helpers, image displ
 
 Product detail behavior is driven by product slugs. Add-to-cart remains a placeholder until the Pinia cart phase.
 
-## Phase 06 — Cart State and Cart Drawer
+## Phase 06 ï¿½ Cart State and Cart Drawer
 
 ### Summary
 
@@ -117,7 +117,7 @@ Added Pinia cart state, cart item rows, cart summary, cart drawer behavior, quan
 
 Cart drawer behavior uses accessible buttons and Escape dismissal through the shared drawer component. The app shell returns focus to the cart button after closing the drawer where possible.
 
-## Phase 07 — Accessibility Pass
+## Phase 07 ï¿½ Accessibility Pass
 
 ### Summary
 
@@ -134,7 +134,7 @@ Added accessibility notes, improved cart button labeling, improved cart drawer f
 
 The accessibility pass focused on semantic controls, labels, keyboard navigation, drawer Escape behavior, focus movement, image alt text, and obvious axe violations.
 
-## Phase 08 — Testing Expansion
+## Phase 08 ï¿½ Testing Expansion
 
 ### Summary
 
@@ -165,7 +165,7 @@ Final fixes:
 - Product detail uses a direct native button for the main add-to-cart action.
 - Cart E2E assertions use scoped drawer locators and stable `data-testid` hooks for cart state.
 
-## Phase 09 — Performance and Build Review
+## Phase 09 ï¿½ Performance and Build Review
 
 ### Summary
 
@@ -181,3 +181,23 @@ Added local product placeholder SVG images, updated product image paths, documen
 ### Notes
 
 Product images now resolve locally instead of producing missing-image requests. Image elements use lazy loading and async decoding. Performance notes document image strategy, computed filtering, cart totals, build checks, and known scope limits.
+
+### Phase 10 Error Reference Logs
+
+Added three Phase 10 troubleshooting references:
+
+- `docs/phase-10-unit-test-storybook-devtools-error.md`
+- `docs/phase-10-typecheck-storybook-args-error.md`
+- `docs/phase-10-other-setup-errors.md`
+
+These document the Storybook/Vitest unhandled errors, the CartDrawer story args type-check issue, and setup issues involving global CSS, config boundaries, generated Storybook demo files, and Playwright Windows path matching.
+
+### Phase 10 Error Reference Logs
+
+Added three Phase 10 troubleshooting references:
+
+- `docs/phase-10-unit-test-storybook-devtools-error.md`
+- `docs/phase-10-typecheck-storybook-args-error.md`
+- `docs/phase-10-other-setup-errors.md`
+
+These document the Storybook/Vitest unhandled errors, the CartDrawer story args type-check issue, and setup issues involving global CSS, config boundaries, generated Storybook demo files, and Playwright Windows path matching.

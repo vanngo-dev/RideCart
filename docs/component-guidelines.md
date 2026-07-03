@@ -25,3 +25,19 @@ The UI layer is organized around small reusable components to keep page-level vi
 ## Review Notes
 
 Reusable components should remain generic. Product, cart, and route-specific behavior should live in product components, cart components, stores, composables, or views.
+
+## Component Examples
+
+Reusable components include isolated examples for default, variant, disabled, empty, and populated states. These examples make component behavior easier to review outside of full page flows.
+
+Current Storybook examples include:
+
+- `AppButton`
+- `AppBadge`
+- `AppInput`
+- `ProductCard`
+- `ProductFilters`
+- `ProductSpecsTable`
+- `CartDrawer`
+
+Storybook is used for component review only. Product, route, and cart integration behavior remains covered by unit/component tests and Playwright E2E tests.

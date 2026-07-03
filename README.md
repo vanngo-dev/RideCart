@@ -105,3 +105,7 @@ npm run typecheck
 npm run lint
 npm run test:unit
 npm run build
+
+## Data Model
+
+The product model uses typed fields for category, pricing, image metadata, stock state, product tags, and technical specifications.

@@ -109,3 +109,7 @@ npm run build
 ## Data Model
 
 The product model uses typed fields for category, pricing, image metadata, stock state, product tags, and technical specifications.
+
+## Reusable UI Components
+
+The UI layer uses small typed Vue components for common controls such as buttons, badges, inputs, selects, drawers, and tabs. Components use semantic HTML first and expose focused props and emits for reuse across page-level features.

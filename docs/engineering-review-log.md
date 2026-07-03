@@ -52,3 +52,19 @@ Added the base application layout, route-driven page skeletons, header navigatio
 ### Notes
 
 The layout now separates the app shell from page views. Product browsing and detail pages remain placeholders until the product component phases.
+
+## Phase 03 — Reusable UI Components
+
+### Summary
+
+Added reusable typed UI components for buttons, badges, inputs, selects, drawers, and tabs.
+
+### Validation
+
+- npm run typecheck
+- npm run test:unit
+- npm run build
+
+### Notes
+
+The shared UI layer uses semantic HTML, typed props, typed emits, basic focus styling, and component tests for button and input behavior.

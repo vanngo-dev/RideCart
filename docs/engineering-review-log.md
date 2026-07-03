@@ -84,3 +84,19 @@ Added product browsing with reusable product cards, responsive grid layout, sear
 ### Notes
 
 Filtering and sorting logic is isolated in `useProductFilters`. Cart behavior remains a placeholder until the cart state phase.
+
+## Phase 05 — Product Detail Page
+
+### Summary
+
+Added route-driven product detail pages with product lookup helpers, image display, specifications table, tags, stock state, related products, and invalid slug handling.
+
+### Validation
+
+- npm run type-check
+- npm run test:unit
+- npm run build
+
+### Notes
+
+Product detail behavior is driven by product slugs. Add-to-cart remains a placeholder until the Pinia cart phase.

@@ -117,3 +117,7 @@ The UI layer uses small typed Vue components for common controls such as buttons
 ## Product Browsing
 
 The product listing view supports search, category filtering, sort options, responsive cards, and empty states. Filtering logic is isolated in a composable to keep the view easier to maintain.
+
+## Product Detail
+
+Product detail routes are driven by product slugs and include stock state, specifications, related items, tags, price display, and accessible image metadata.

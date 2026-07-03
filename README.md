@@ -71,3 +71,37 @@ npm run test:e2e -- --debug
 ```sh
 npm run lint
 ```
+# RideCart Vue 3 Commerce UI
+
+A compact Vue 3 + TypeScript commerce frontend slice for product browsing, filtering, product details, and cart interactions.
+
+## Tech Stack
+
+- Vue 3
+- TypeScript
+- Vite
+- Vue Router
+- Pinia
+- Vitest
+- Playwright
+
+## Focus
+
+This project focuses on maintainable frontend architecture, reusable components, typed state, accessible interactions, and reviewable documentation.
+
+## Application Routes
+
+- `/` home page
+- `/products` product browsing page
+- `/products/:slug` product detail page
+
+## Run Locally
+
+```bash
+npm install
+npm run dev
+Quality Checks
+npm run typecheck
+npm run lint
+npm run test:unit
+npm run build

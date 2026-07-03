@@ -100,3 +100,19 @@ Added route-driven product detail pages with product lookup helpers, image displ
 ### Notes
 
 Product detail behavior is driven by product slugs. Add-to-cart remains a placeholder until the Pinia cart phase.
+
+## Phase 06 — Cart State and Cart Drawer
+
+### Summary
+
+Added Pinia cart state, cart item rows, cart summary, cart drawer behavior, quantity controls, item removal, clear cart behavior, subtotal calculation, and add-to-cart wiring from product listing and detail pages.
+
+### Validation
+
+- npm run type-check
+- npm run test:unit
+- npm run build
+
+### Notes
+
+Cart drawer behavior uses accessible buttons and Escape dismissal through the shared drawer component. The app shell returns focus to the cart button after closing the drawer where possible.

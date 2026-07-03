@@ -1,39 +1,16 @@
-import { describe, expect, it } from 'vitest'
+﻿import { describe, expect, it } from 'vitest'
 import { mount } from '@vue/test-utils'
+import { createPinia } from 'pinia'
 import { createMemoryHistory, createRouter } from 'vue-router'
 
 import App from '@/App.vue'
-import HomeView from '@/views/HomeView.vue'
-import ProductListView from '@/views/ProductListView.vue'
-import ProductDetailView from '@/views/ProductDetailView.vue'
-import NotFoundView from '@/views/NotFoundView.vue'
+import { routes } from '@/router'
 
 describe('App', () => {
-  it('mounts with router shell', async () => {
+  it('mounts with router and pinia shell', async () => {
     const router = createRouter({
       history: createMemoryHistory(),
-      routes: [
-        {
-          path: '/',
-          name: 'home',
-          component: HomeView,
-        },
-        {
-          path: '/products',
-          name: 'products',
-          component: ProductListView,
-        },
-        {
-          path: '/products/:slug',
-          name: 'product-detail',
-          component: ProductDetailView,
-        },
-        {
-          path: '/:pathMatch(.*)*',
-          name: 'not-found',
-          component: NotFoundView,
-        },
-      ],
+      routes,
     })
 
     router.push('/')
@@ -41,7 +18,7 @@ describe('App', () => {
 
     const wrapper = mount(App, {
       global: {
-        plugins: [router],
+        plugins: [router, createPinia()],
       },
     })
 

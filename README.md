@@ -121,3 +121,7 @@ The product listing view supports search, category filtering, sort options, resp
 ## Product Detail
 
 Product detail routes are driven by product slugs and include stock state, specifications, related items, tags, price display, and accessible image metadata.
+
+## Cart Behavior
+
+Cart state is managed with Pinia and kept separate from page components. The cart drawer supports keyboard dismissal, item quantity controls, item removal, subtotal calculation, and accessible controls for cart updates.

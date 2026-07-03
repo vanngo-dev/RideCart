@@ -1,7 +1,8 @@
 ﻿<script setup lang="ts">
 import { RouterView } from 'vue-router'
-import AppHeader from './components/layout/AppHeader.vue'
-import AppFooter from './components/layout/AppFooter.vue'
+
+import AppFooter from '@/components/layout/AppFooter.vue'
+import AppHeader from '@/components/layout/AppHeader.vue'
 </script>
 
 <template>
@@ -16,39 +17,7 @@ import AppFooter from './components/layout/AppFooter.vue'
   </div>
 </template>
 
-<style>
-:root {
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #172026;
-  background: #f6f7f8;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  background: #f6f7f8;
-}
-
-a {
-  color: inherit;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
+<style scoped>
 .app-shell {
   min-height: 100vh;
   display: flex;

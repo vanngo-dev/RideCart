@@ -36,3 +36,19 @@ Added typed product and filter models with mock product data for the commerce UI
 ### Notes
 
 Product data includes unique IDs, unique slugs, image alt text, stock state, ratings, tags, pricing, and technical specifications.
+
+## Phase 02 — Routing, Layout, and Page Skeletons
+
+### Summary
+
+Added the base application layout, route-driven page skeletons, header navigation, footer, skip link, and router smoke coverage.
+
+### Validation
+
+- npm run typecheck
+- npm run test:unit
+- npm run build
+
+### Notes
+
+The layout now separates the app shell from page views. Product browsing and detail pages remain placeholders until the product component phases.

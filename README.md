@@ -151,3 +151,11 @@ The Phase 08 browsing-to-cart flow exposed both a runtime add-to-cart drawer iss
 The project uses local placeholder product images, lazy image loading, async image decoding, computed product filtering, Pinia-derived cart totals, and production build checks.
 
 See `docs/performance-notes.md`.
+## Storybook Component Examples
+
+Storybook documents reusable UI, product, and cart components in isolated states for review.
+
+Run locally:
+
+```bash
+npm run storybook

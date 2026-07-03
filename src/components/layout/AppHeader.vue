@@ -1,4 +1,39 @@
-﻿<template>
+﻿<script setup lang="ts">
+import { computed, ref } from 'vue'
+
+const props = withDefaults(
+  defineProps<{
+    cartCount?: number
+  }>(),
+  {
+    cartCount: 0,
+  },
+)
+
+const emit = defineEmits<{
+  openCart: []
+}>()
+
+const cartButtonRef = ref<HTMLButtonElement | null>(null)
+
+const cartButtonLabel = computed(() => {
+  if (props.cartCount === 0) {
+    return 'Open cart, cart is empty'
+  }
+
+  return `Open cart, ${props.cartCount} item${props.cartCount === 1 ? '' : 's'}`
+})
+
+const focusCartButton = () => {
+  cartButtonRef.value?.focus()
+}
+
+defineExpose({
+  focusCartButton,
+})
+</script>
+
+<template>
   <header class="site-header">
     <a class="skip-link" href="#main-content">Skip to content</a>
 
@@ -11,8 +46,18 @@
         <RouterLink to="/products">Products</RouterLink>
       </nav>
 
-      <button class="cart-button" type="button" aria-label="Open cart">
+      <button
+        ref="cartButtonRef"
+        data-testid="cart-button"
+        class="cart-button"
+        type="button"
+        :aria-label="cartButtonLabel"
+        @click="emit('openCart')"
+      >
         Cart
+        <span v-if="cartCount > 0" class="cart-count" aria-hidden="true">
+          {{ cartCount }}
+        </span>
       </button>
     </div>
   </header>
@@ -59,6 +104,9 @@
 }
 
 .cart-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   border: 1px solid #d1d5db;
   border-radius: 999px;
   background: #ffffff;
@@ -70,6 +118,23 @@
 
 .cart-button:hover {
   background: #f9fafb;
+}
+
+.cart-button:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.cart-count {
+  min-width: 1.5rem;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+  padding: 0.1875rem 0.4375rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  line-height: 1;
+  text-align: center;
 }
 
 .skip-link {

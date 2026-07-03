@@ -1,5 +1,5 @@
 ﻿<script setup lang="ts">
-import { onBeforeUnmount, watch } from 'vue'
+import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
 
 const props = withDefaults(
   defineProps<{
@@ -15,6 +15,7 @@ const emit = defineEmits<{
   close: []
 }>()
 
+const closeButtonRef = ref<HTMLButtonElement | null>(null)
 const titleId = `drawer-title-${Math.random().toString(36).slice(2)}`
 
 const closeDrawer = () => {
@@ -29,9 +30,11 @@ const handleKeydown = (event: KeyboardEvent) => {
 
 watch(
   () => props.open,
-  (isOpen) => {
+  async (isOpen) => {
     if (isOpen) {
       document.addEventListener('keydown', handleKeydown)
+      await nextTick()
+      closeButtonRef.value?.focus()
     } else {
       document.removeEventListener('keydown', handleKeydown)
     }
@@ -48,8 +51,9 @@ onBeforeUnmount(() => {
 
 <template>
   <Teleport to="body">
-    <div v-if="open" class="drawer-overlay" @click.self="closeDrawer">
+    <div v-if="open" data-testid="drawer-overlay" class="drawer-overlay" @click.self="closeDrawer">
       <aside
+        data-testid="cart-drawer"
         class="drawer-panel"
         role="dialog"
         aria-modal="true"
@@ -60,7 +64,14 @@ onBeforeUnmount(() => {
             {{ title }}
           </h2>
 
-          <button class="drawer-close" type="button" aria-label="Close drawer" @click="closeDrawer">
+          <button
+            ref="closeButtonRef"
+            data-testid="drawer-close-button"
+            class="drawer-close"
+            type="button"
+            aria-label="Close drawer"
+            @click="closeDrawer"
+          >
             ×
           </button>
         </header>
@@ -122,6 +133,11 @@ onBeforeUnmount(() => {
 
 .drawer-close:hover {
   background: #f9fafb;
+}
+
+.drawer-close:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 2px;
 }
 
 .drawer-content {

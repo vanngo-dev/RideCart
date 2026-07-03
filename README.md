@@ -125,3 +125,9 @@ Product detail routes are driven by product slugs and include stock state, speci
 ## Cart Behavior
 
 Cart state is managed with Pinia and kept separate from page components. The cart drawer supports keyboard dismissal, item quantity controls, item removal, subtotal calculation, and accessible controls for cart updates.
+
+## Accessibility Notes
+
+The interface uses semantic landmarks, labeled form controls, descriptive image alt text, native buttons and links, visible focus states, keyboard-friendly cart drawer behavior, and a Playwright axe smoke test for the product listing page.
+
+See `docs/accessibility-notes.md`.

@@ -116,3 +116,20 @@ Added Pinia cart state, cart item rows, cart summary, cart drawer behavior, quan
 ### Notes
 
 Cart drawer behavior uses accessible buttons and Escape dismissal through the shared drawer component. The app shell returns focus to the cart button after closing the drawer where possible.
+
+## Phase 07 — Accessibility Pass
+
+### Summary
+
+Added accessibility notes, improved cart button labeling, improved cart drawer focus handling, and added Playwright + axe smoke coverage for the product listing page.
+
+### Validation
+
+- npm run type-check
+- npm run test:unit
+- npm run build
+- npm run test:e2e
+
+### Notes
+
+The accessibility pass focused on semantic controls, labels, keyboard navigation, drawer Escape behavior, focus movement, image alt text, and obvious axe violations.

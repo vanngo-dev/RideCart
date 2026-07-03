@@ -258,9 +258,3 @@ Before final release, run:
     npm run build
     npm run test:e2e
     npm run build-storybook
-
-## Repository Description
-
-Recommended GitHub description:
-
-    Vue 3 + TypeScript commerce UI with reusable components, Pinia cart state, responsive product browsing, accessibility notes, and test coverage.
